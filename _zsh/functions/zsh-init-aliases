@@ -1,0 +1,15 @@
+# Aliases. I don't use much
+
+# Terrible heuristic to guess the current host is a mac, and has ls from gnu
+# coreutils installed
+if [[ -e /usr/local/bin/gls ]] ; then
+	alias ls='gls --color=auto -F'
+else
+	alias ls='ls --color=auto -F'
+fi
+
+# Terrible heuristic to guess the current host is a mac, and has gnu grep
+# installed
+if grep --version | grep GNU > /dev/null 2>&1 ; then
+	alias grep='grep --color=auto'
+fi

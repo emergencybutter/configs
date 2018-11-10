@@ -1,0 +1,18 @@
+bindkey -v
+stty -ixon
+stty -ixoff
+
+autoload edit-command-line
+zle -N edit-command-line
+
+bindkey -e
+
+bindkey '^x' edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Paste url in your shell and it's automatically escaped.
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic

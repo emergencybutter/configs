@@ -1,0 +1,20 @@
+HISTSIZE=5000
+SAVEHIST=10000000
+HISTFILE=~/.zsh/history
+
+for i in dircolors gdircolors ; do
+	if [[ -e $(which "${i}") ]] ; then
+		if [[ -e ~/.dir_colors ]] ; then
+			eval $("${i}" -b ~/.dir_colors)
+		else
+			eval $("${i}" -b)
+		fi
+	fi
+done
+
+# Remove / from WORDCHARS
+export WORDCHARS="${WORDCHARS:s@/@}"
+export VISUAL=vim
+export EDITOR=vim
+export GREP_COLOR=32
+export PATH="${PATH}:/sbin:/usr/sbin:/usr/local/sbin:${HOME}/bin:${HOME}/.cargo/bin"

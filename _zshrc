@@ -1,0 +1,17 @@
+# ~/.zshrc
+[[ -z "$PS1" ]] && return
+
+fpath=(~/.zsh/functions ${fpath[@]})
+autoload -Uz ~/.zsh/functions/*(:t)
+
+zsh-init-set-opts
+zsh-init-environment
+zsh-init-common-deps
+zsh-init-command-editting
+zsh-init-completion
+zsh-init-setup-prompt
+zsh-init-aliases
+
+if [[ -r .zsh/local.zsh ]] ;then
+	source ~/.zsh/local.zsh
+fi

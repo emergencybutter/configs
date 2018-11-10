@@ -1,0 +1,55 @@
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%m %b"
+
+vcs-info-in-pvar() {
+	vcs_info
+	typeset -ga psvar
+	psvar[1]="${vcs_info_msg_0_}"
+}
+
+setup-prompt() {
+	local hardstatus
+	local puser=
+	local phost=
+	local suffix="$1"
+
+	typeset -ga psvar
+	typeset -ga precmd_functions
+
+	precmd_functions+='vcs-info-in-pvar'
+
+	case "${TERM}" in
+	xterm*)
+		hardstatus=$'%{\e]0;%n@%m %~\a%}'
+		;;
+	screen)
+		hardstatus=$'%{\e_tmux \005 (\005t) | %n@%m %~ %y\e\\%}'
+		;;
+	*)
+		hardstatus=''
+		;;
+	esac
+
+	if [[ -n "${suffix}" ]] ; then
+		suffix="(${suffix})"
+	fi
+	puser="%n@"
+	if [[ "${USER}" = "root" ]] ; then
+		puser="%F{red}%n@%f"
+	fi
+	if test -f /etc/vanity-hostname ; then
+		phost="$(cat /etc/vanity-hostname)"
+		phost="${phost%%.*} "
+	else
+		phost="%m "
+	fi
+	PROMPT="${hardstatus}${debian_chroot:+($debian_chroot)}${puser}${phost}"
+	PROMPT+="%B%F{blue}%35<…<%~%f%b${suffix}%# "
+
+	RPROMPT='%1v%(1v.%F{green}%f.)'
+
+	vcs-info-in-pvar
+}
+
+setup-prompt

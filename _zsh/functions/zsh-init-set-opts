@@ -1,0 +1,16 @@
+setopt AUTOPUSHD
+setopt COMPLETE_IN_WORD
+setopt EXTENDED_GLOB
+setopt HIST_IGNORE_DUPS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
+setopt LIST_PACKED
+setopt LIST_TYPES
+setopt MAGIC_EQUAL_SUBST
+setopt PRINT_EXIT_VALUE
+setopt PRINT_EXIT_VALUE
+setopt TRANSIENT_RPROMPT
+unsetopt BEEP
+unsetopt HUP
+unsetopt MAIL_WARNING
+unsetopt NO_MATCH
