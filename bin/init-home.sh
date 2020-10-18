@@ -10,8 +10,7 @@ fi
 mkdir -p ~/.zsh/functions ~/.vim
 
 CONFIGS=$(pwd -P)
-find . -type f -not -path '*/\.*' | while read p ; do
-	p=${p:2}
+for p in _* ; do
 	dotp=${p/_/.}
 	echo $dotp
 	(cd && ln -sf ${CONFIGS}/${p} ${dotp})
